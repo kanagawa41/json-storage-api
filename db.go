@@ -7,33 +7,12 @@ import (
 	_ "github.com/mattn/go-sqlite3"
 )
 
-// DBのレコードの構造体
+// Stock is DBのレコード
 type Stock struct {
 	ID   int64
 	UUID string
 	JSON string
 }
-
-// func main() {
-// 	// テーブル作成
-// 	_, err = db.Exec(
-// 		`CREATE TABLE IF NOT EXISTS "STOCKS" ("ID" INTEGER PRIMARY KEY, "UUID" VARCHAR(255), "JSON" BLOB)`,
-// 	)
-// 	if err != nil {
-// 		panic(err)
-// 	}
-
-// 	las := lastID(db)
-// 	cID := createStock(db, las+1)
-
-// 	s := selectStock(db, cID)
-// 	fmt.Println(s)
-
-// 	updateStock(db, cID, "{\"test\":\"value\"}")
-
-// 	s = selectStock(db, cID)
-// 	fmt.Println(s)
-// }
 
 func connection() (*sql.DB, error) {
 	db, err := sql.Open("sqlite3", "./stock.db")
@@ -52,33 +31,6 @@ func connection() (*sql.DB, error) {
 
 	return db, nil
 }
-
-// func testID() {
-//   // Output will be stored here.
-//   var output string
-
-//   // Prepare your query
-//   query, err := DB.Prepare("SELECT COUNT(*) as count FROM  STOCKS")
-
-//   if err != nil {
-//       fmt.Printf("%s", err)
-//   }
-
-//   defer query.Close()
-
-//   // Execute query using 'id' and place value into 'output'
-//   err = query.QueryRow().Scan(&output)
-
-//   // Catch errors
-//   switch {
-//   case err == sql.ErrNoRows:
-//           fmt.Printf("No notebook with that ID.")
-//   case err != nil:
-//           fmt.Printf("%s", err)
-//   default:
-//           fmt.Printf("Counted %s notebooks\n", output)
-//   }
-// }
 
 func lastID(db *sql.DB) (lastID int) {
 	// 1件取得
@@ -175,7 +127,7 @@ func updateStock(db *sql.DB, uuid string, json string) (int64, error) {
 
 func deleteStock(db *sql.DB, uuid string) (int64, error) {
 	res, err := db.Exec(
-		`DELETE STOCKS WHERE UUID=?`,
+		`DELETE FROM STOCKS WHERE UUID=?`,
 		uuid,
 	)
 	if err != nil {
