@@ -9,7 +9,7 @@ $ go run main.go db.go
 # test
 ## create stock
 ```
-$ curl -X POST -H "Content-Type: application/json" localhost:8080/api/v1/stocks
+$ curl -X POST -H "Content-Type: application/json" localhost:8090/api/v1/stocks
 ```
 
 ### response
@@ -19,7 +19,7 @@ $ curl -X POST -H "Content-Type: application/json" localhost:8080/api/v1/stocks
 
 ## get stock
 ```
-$ curl localhost:8080/api/v1/stocks/1a04e33f41988d98fda0dd94d7e61a82
+$ curl localhost:8090/api/v1/stocks/1a04e33f41988d98fda0dd94d7e61a82
 ```
 
 ### response
@@ -29,7 +29,7 @@ $ curl localhost:8080/api/v1/stocks/1a04e33f41988d98fda0dd94d7e61a82
 
 ## update stock
 ```
-$ curl -X POST -H "Content-Type: application/x-www-form-urlencoded" --data-urlencode "json=\"{\"id\":\"test\",\"post\":\"test2\"}\"" localhost:8080/api/v1/stocks/1a04e33f41988d98fda0dd94d7e61a82/put
+$ curl -X POST -H "Content-Type: application/x-www-form-urlencoded" --data-urlencode "json=\"{\"id\":\"test\",\"post\":\"test2\"}\"" localhost:8090/api/v1/stocks/1a04e33f41988d98fda0dd94d7e61a82/put
 ```
 
 ### response
@@ -39,7 +39,7 @@ $ curl -X POST -H "Content-Type: application/x-www-form-urlencoded" --data-urlen
 
 ## Deltete stock
 ```
-$ curl -X POST -H "Content-Type: application/x-www-form-urlencoded" localhost:8080/api/v1/stocks/1a04e33f41988d98fda0dd94d7e61a82/delete
+$ curl -X POST -H "Content-Type: application/x-www-form-urlencoded" localhost:8090/api/v1/stocks/1a04e33f41988d98fda0dd94d7e61a82/delete
 ```
 
 ### response

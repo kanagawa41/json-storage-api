@@ -80,7 +80,7 @@ func main() {
 		}
 	})
 
-	router.Run(":8080")
+	router.Run(":8090")
 }
 
 func updateStockHandler(c *gin.Context, uuid string, json string) {
