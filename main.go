@@ -66,7 +66,7 @@ func main() {
 
 		uuid := c.Param("uuid")
 		json := c.PostForm("json")
-
+		fmt.Println(json)
 		switch action {
 		case "/put":
 			updateStockHandler(c, uuid, json)
@@ -99,7 +99,7 @@ func updateStockHandler(c *gin.Context, uuid string, json string) {
 
 	c.JSON(200, gin.H{
 		"error":  nil,
-		"result": true,
+		"result": len(json),
 	})
 }
 func deleteStockHandler(c *gin.Context, uuid string) {
