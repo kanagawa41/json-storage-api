@@ -74,14 +74,6 @@
   version = "v0.0.7"
 
 [[projects]]
-  digest = "1:e2ac6e4ee843b2001b6c3a7801180ea3f7fa6d61fb917ca7dde15e26ef02a082"
-  name = "github.com/mattn/go-sqlite3"
-  packages = ["."]
-  pruneopts = "UT"
-  revision = "9bdaffc12bf8be15afceb51bb60851edd4afdff5"
-  version = "v2.0.3"
-
-[[projects]]
   digest = "1:33422d238f147d247752996a26574ac48dcf472976eda7f5134015f06bf16563"
   name = "github.com/modern-go/concurrent"
   packages = ["."]
@@ -132,9 +124,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  input-imports = [
-    "github.com/gin-gonic/gin",
-    "github.com/mattn/go-sqlite3",
-  ]
+  input-imports = ["github.com/gin-gonic/gin"]
   solver-name = "gps-cdcl"
   solver-version = 1

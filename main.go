@@ -1,7 +1,6 @@
 package main
 
 import (
-	"database/sql"
 	"fmt"
 
 	"github.com/gin-gonic/gin"
@@ -14,20 +13,10 @@ func main() {
 	router.GET("/api/v1/stocks/:uuid", func(c *gin.Context) {
 		uuid := c.Param("uuid")
 
-		db, err := connection()
+		s, err := selectStock(uuid)
+
 		if err != nil {
 			serverErrorHandler(c, err)
-			return
-		}
-		defer db.Close()
-
-		s, err := selectStock(db, uuid)
-
-		if err == sql.ErrNoRows {
-			c.JSON(400, gin.H{
-				"error":  "Not found",
-				"result": nil,
-			})
 			return
 		}
 
@@ -39,15 +28,7 @@ func main() {
 
 	// Create stock
 	router.POST("/api/v1/stocks", func(c *gin.Context) {
-		db, err := connection()
-		if err != nil {
-			serverErrorHandler(c, err)
-			return
-		}
-		defer db.Close()
-
-		las := lastID(db)
-		s, err := createStock(db, las+1)
+		s, err := createStock()
 
 		if err != nil {
 			serverErrorHandler(c, err)
@@ -84,14 +65,7 @@ func main() {
 }
 
 func updateStockHandler(c *gin.Context, uuid string, json string) {
-	db, err := connection()
-	if err != nil {
-		serverErrorHandler(c, err)
-		return
-	}
-	defer db.Close()
-
-	_, err = updateStock(db, uuid, json)
+	_, err := updateStock(uuid, json)
 	if err != nil {
 		serverErrorHandler(c, err)
 		return
@@ -103,14 +77,7 @@ func updateStockHandler(c *gin.Context, uuid string, json string) {
 	})
 }
 func deleteStockHandler(c *gin.Context, uuid string) {
-	db, err := connection()
-	if err != nil {
-		serverErrorHandler(c, err)
-		return
-	}
-	defer db.Close()
-
-	_, err = deleteStock(db, uuid)
+	_, err := deleteStock(uuid)
 	if err != nil {
 		serverErrorHandler(c, err)
 		return

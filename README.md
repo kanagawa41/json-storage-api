@@ -52,6 +52,7 @@ $ curl -X POST -H "Content-Type: application/x-www-form-urlencoded" localhost:80
 `go env`
 
 ## Do it
+`env CC=x86_64-w64-mingw32-gcc CGO_ENABLED=1 GOOS=linux GOARCH=amd64 go build -a -v .`
 `env CGO_ENABLED=1 GOOS=linux GOARCH=amd64 go build`
 
 # deploy
