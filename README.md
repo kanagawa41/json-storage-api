@@ -46,3 +46,17 @@ $ curl -X POST -H "Content-Type: application/x-www-form-urlencoded" localhost:80
 ```json
 {"error":null,"result":true}
 ```
+
+# build
+## In executing server
+`go env`
+
+## Do it
+`env CGO_ENABLED=1 GOOS=linux GOARCH=amd64 go build`
+
+# deploy
+# Do it
+`nohup ./json-storage-api &`
+
+## kill
+`ps aux | grep json-storage-api`
