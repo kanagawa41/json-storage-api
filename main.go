@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"os"
 
 	"github.com/gin-gonic/gin"
 )
@@ -9,21 +10,22 @@ import (
 func main() {
 	router := gin.Default()
 
+	if err := os.MkdirAll(baseURL, 0777); err != nil {
+		panic(err)
+	}
+
 	// Get stock
 	router.GET("/api/v1/stocks/:uuid", func(c *gin.Context) {
 		uuid := c.Param("uuid")
 
-		s, err := selectStock(uuid)
+		_, err := selectStock(uuid)
 
 		if err != nil {
 			serverErrorHandler(c, err)
 			return
 		}
 
-		c.JSON(200, gin.H{
-			"error":  nil,
-			"result": s,
-		})
+		c.File(getFilePath(uuid))
 	})
 
 	// Create stock

@@ -15,7 +15,7 @@ type Stock struct {
 }
 
 var (
-	baseURL = "/tmp/stock_api/stocks"
+	baseURL = "./stocks"
 )
 
 func isExistFile(path string) (flag bool, err error) {
@@ -38,6 +38,10 @@ func selectStock(uuid string) (s Stock, err error) {
 	s.JSON = string(dat)
 
 	return s, nil
+}
+
+func getFilePath(uuid string) string {
+	return baseURL + "/" + uuid
 }
 
 func createStock() (s Stock, err error) {
